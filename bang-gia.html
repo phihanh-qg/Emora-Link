@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bảng Giá - EMORA LINK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <style>
+        .price-wrapper { display: flex; flex-wrap: wrap; gap: 20px; width: 100%; max-width: 1200px; margin-top: 10px;}
+        .price-card { background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; flex: 1; min-width: 250px; transition: 0.3s;}
+        .price-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-5px);}
+        .price-card h4 { font-size: 1.3rem; margin-bottom: 10px;}
+        .price-val { font-size: 2.2rem; font-weight: bold; margin-bottom: 15px;}
+        .btn-outline { width: 100%; padding: 12px; background: transparent; border: 1px solid #fff; color: #fff; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s;}
+        .btn-outline:hover { background: #fff; color: #000;}
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-box"><img src="img/logo.png" alt="Logo"><span>EMORA LINK</span></a>
+        <nav id="main-nav">
+            <a href="index.html">Trang chủ</a><a href="prototype.html">Prototype</a>
+            <a href="thuong-mai.html">Thương Mại</a><a href="co-che.html">Cơ Chế</a>
+            <a href="bang-gia.html">Bảng Giá</a>
+        </nav>
+        <a href="bang-gia.html" class="btn-buy">MUA NGAY</a>
+    </header>
+
+    <div class="fullpage-wrapper">
+        <div class="sections-container" id="sections-container">
+            <div class="section">
+                <div class="epic-layout">
+                    <h3 style="color: var(--neon-cyan); letter-spacing: 3px; margin-bottom: 10px;">ĐẦU TƯ SỞ HỮU</h3>
+                    <h2 style="font-size: 3rem; margin-bottom: 15px;">LỰA CHỌN PHÂN PHỐI</h2>
+                    <p style="color: #aaa; margin-bottom: 30px;">Tối ưu hóa giá thành sản xuất để phù hợp với túi tiền sinh viên và các tổ chức.</p>
+                    
+                    <div class="price-wrapper">
+                        <div class="price-card" style="border-top: 3px solid var(--neon-cyan);">
+                            <h4 style="color: var(--neon-cyan);">BÁN LẺ (B2C)</h4>
+                            <div class="price-val">450K<span style="font-size: 1rem; color:#aaa"> /thiết bị</span></div>
+                            <ul class="list-info" style="text-align: left;">
+                                <li>Mua đứt, sở hữu vĩnh viễn.</li>
+                                <li>Không thu phí duy trì.</li>
+                                <li>Dành cho sinh viên, cá nhân.</li>
+                            </ul>
+                            <button class="btn-outline">ĐẶT MUA NGAY</button>
+                        </div>
+                        
+                        <div class="price-card" style="border-top: 3px solid var(--neon-magenta);">
+                            <h4 style="color: var(--neon-magenta);">THUÊ SỰ KIỆN (B2B)</h4>
+                            <div class="price-val">50K<span style="font-size: 1rem; color:#aaa"> /ngày</span></div>
+                            <ul class="list-info" style="text-align: left;">
+                                <li>Dành cho BTC sự kiện ngắn ngày.</li>
+                                <li>Hỗ trợ setup trạm Booth.</li>
+                            </ul>
+                            <button class="btn-outline" style="border-color: var(--neon-magenta); color: var(--neon-magenta);">LIÊN HỆ THUÊ</button>
+                        </div>
+
+                        <div class="price-card" style="border-top: 3px solid var(--neon-blue);">
+                            <h4 style="color: var(--neon-blue);">BÁN SỈ (B2B)</h4>
+                            <div class="price-val">350K<span style="font-size: 1rem; color:#aaa"> - 400K</span></div>
+                            <ul class="list-info" style="text-align: left;">
+                                <li>Cung cấp lô cho CLB, Đoàn Hội.</li>
+                                <li>Quà tặng Onboarding cho SMEs.</li>
+                            </ul>
+                            <button class="btn-outline" style="border-color: var(--neon-blue); color: var(--neon-blue);">NHẬN BÁO GIÁ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

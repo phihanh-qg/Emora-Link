@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype - EMORA LINK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    
+    <!-- CSS VIẾT RIÊNG CHO TRANG NÀY - SIÊU NGẦU -->
+    <style>
+        /* --- 1. HIỆU ỨNG 4 ẢNH GRID 3D --- */
+        .proto-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+            perspective: 1000px; /* Tạo không gian 3D */
+        }
+
+        .proto-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: crosshair;
+        }
+
+        .proto-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* Khi rờ chuột: Nghiêng 3D và sáng viền */
+        .proto-item:hover {
+            transform: rotateX(10deg) rotateY(-10deg) scale(1.05);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.3), 
+                        inset 0 0 20px rgba(0, 255, 204, 0.2);
+            z-index: 10;
+        }
+
+        .proto-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- 2. HIỆU ỨNG MATCH (SÓNG RADAR) --- */
+        .interaction-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            height: 400px;
+            position: relative;
+        }
+
+        .device-node {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            z-index: 5;
+        }
+
+        .device-node img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+        }
+
+        /* Đèn LED nhấp nháy */
+        .led-indicator {
+            position: absolute;
+            top: 45%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px; height: 15px;
+            background: #00ff00;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Sóng kết nối rực rỡ */
+        .wave-emitter {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        .pulse-wave {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #00ff00;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Kích hoạt khi slide active */
+        .active .match-success .led-indicator {
+            animation: heartBeat 1.5s infinite;
+            opacity: 1;
+        }
+
+        .active .match-success .pulse-wave {
+            animation: radarExpand 2.5s linear infinite;
+        }
+
+        .active .match-success .pw-2 { animation-delay: 1.2s; }
+
+        /* --- 3. HIỆU ỨNG LỌC (GLITCH) --- */
+        .active .match-fail .device-node {
+            filter: grayscale(1) contrast(1.2) opacity(0.6);
+            animation: staticNoise 0.2s infinite;
+        }
+
+        .fail-barrier {
+            font-size: 3rem;
+            color: #444;
+            text-shadow: 0 0 10px rgba(255,0,0,0.2);
+            font-weight: 900;
+            opacity: 0.3;
+        }
+
+        /* --- ANIMATIONS KEYFRAMES --- */
+        @keyframes heartBeat {
+            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 5px #00ff00; }
+            50% { transform: translate(-50%, -50%) scale(1.3); box-shadow: 0 0 25px 10px #00ff00; }
+            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 5px #00ff00; }
+        }
+
+        @keyframes radarExpand {
+            0% { width: 50px; height: 50px; opacity: 1; }
+            100% { width: 500px; height: 500px; opacity: 0; }
+        }
+
+        @keyframes staticNoise {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0,0); }
+        }
+
+        @media (max-width: 900px) {
+            .interaction-container { gap: 20px; flex-direction: column; }
+            .device-node { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-box"><img src="img/logo.png" alt="Logo"><span>EMORA LINK</span></a>
+        <nav id="main-nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="prototype.html" class="active-link">Prototype</a>
+            <a href="thuong-mai.html">Thương Mại</a>
+            <a href="co-che.html">Cơ Chế</a>
+            <a href="bang-gia.html">Bảng Giá</a>
+        </nav>
+        <a href="bang-gia.html" class="btn-buy">MUA NGAY</a>
+    </header>
+
+    <div class="fullpage-wrapper">
+        <div class="sections-container" id="sections-container">
+            
+            <!-- SLIDE 1: CÔNG NGHỆ MVP -->
+            <div class="section active">
+                <div class="split-layout">
+                    <div class="col-img">
+                        <div class="proto-grid">
+                            <div class="proto-item"><img src="img/top_view.png" alt="Góc trên"></div>
+                            <div class="proto-item"><img src="img/behind_view.png" alt="Góc sau"></div>
+                            <div class="proto-item"><img src="img/front_view.png" alt="Góc trước"></div>
+                            <div class="proto-item"><img src="img/under_view.png" alt="Góc dưới"></div>
+                        </div>
+                    </div>
+                    <div class="col-text text-left">
+                        <h3 style="color: var(--neon-magenta);">GIAI ĐOẠN 1</h3>
+                        <h2>NGUYÊN MẪU KHẢ DỤNG (MVP)</h2>
+                        <p>Dự án đã hoàn tất khái niệm hóa và chế tạo thành công thiết bị thử nghiệm hoạt động độc lập.</p>
+                        <ul class="list-info">
+                            <li><strong>Chip xử lý:</strong> ESP32-C3 hỗ trợ Bluetooth 5.0 năng lượng thấp.</li>
+                            <li><strong>Vỏ hộp:</strong> In 3D nhựa PLA cao cấp, tối ưu hóa cho debug phần cứng.</li>
+                            <li><strong>Pin:</strong> Li-po 3.7V tích hợp mạch sạc thông minh.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: MINH HOẠ KẾT NỐI -->
+            <div class="section">
+                <div class="split-layout">
+                    <div class="col-text text-left">
+                        <h3 style="color: #00ffcc;">VẬN HÀNH THỰC TẾ</h3>
+                        <h2>KẾT NỐI TỨC THÌ</h2>
+                        <p>Minh họa thiết bị hoạt động thực tế. Khi hai người dùng có sự tương đồng về sở thích, hệ thống lập tức bắt sóng và phát ra hào quang xanh báo hiệu.</p>
+                    </div>
+                    <div class="col-img">
+                        <div class="interaction-container match-success">
+                            <div class="device-node">
+                                <img src="img/pro_matched_A.png" alt="Thiết bị A">
+                                <div class="led-indicator"></div>
+                                <div class="wave-emitter">
+                                    <div class="pulse-wave"></div>
+                                    <div class="pulse-wave pw-2"></div>
+                                </div>
+                            </div>
+                            <div class="device-node">
+                                <img src="img/pro_matched_B.png" alt="Thiết bị B">
+                                <div class="led-indicator"></div>
+                                <div class="wave-emitter">
+                                    <div class="pulse-wave"></div>
+                                    <div class="pulse-wave pw-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: MINH HOẠ LỌC ĐỐI TƯỢNG -->
+            <div class="section">
+                <div class="split-layout">
+                    <div class="col-img">
+                        <div class="interaction-container match-fail">
+                            <div class="device-node"><img src="img/pro_unmatched_A.png" alt="Thiết bị C"></div>
+                            <div class="fail-barrier">✕</div>
+                            <div class="device-node"><img src="img/pro_unmatched_B.png" alt="Thiết bị D"></div>
+                        </div>
+                    </div>
+                    <div class="col-text text-left">
+                        <h3 style="color: #666;">THUẬT TOÁN THÔNG MINH</h3>
+                        <h2>BẢO MẬT & CHỌN LỌC</h2>
+                        <p>Mặc dù đứng gần nhau, nhưng nếu không có sự trùng khớp về dữ liệu sở thích, thiết bị vẫn giữ nguyên trạng thái tĩnh để đảm bảo quyền riêng tư.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cơ Chế - EMORA LINK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <style>
+        /* --- DASHBOARD DASHBOARD 2 CỘT TỐI ƯU --- */
+        .dashboard-container {
+            display: flex;
+            width: 100%;
+            max-width: 1500px;
+            gap: 30px;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .simulator-sidebar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .user-config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .user-panel {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .user-panel h4 {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .select-group { margin-bottom: 12px; }
+        .select-group label { display: block; color: #888; font-size: 0.8rem; margin-bottom: 5px; }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #111;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .display-screen {
+            background: #000;
+            border-radius: 15px;
+            border: 1px solid var(--neon-cyan);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            min-height: 150px;
+        }
+
+        .device-node {
+            width: 80px; height: 80px;
+            background: #222;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+
+        .led-active {
+            width: 22px; height: 22px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .status-info { text-align: center; max-width: 200px; }
+        .status-info h5 { font-size: 1.2rem; color: var(--neon-cyan); margin-bottom: 5px; text-transform: uppercase; }
+        .status-info p { font-size: 0.8rem; color: #aaa; font-style: italic; line-height: 1.4; }
+
+        .table-data-side {
+            flex: 1.3;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .table-data-side h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .huawei-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .huawei-table th {
+            text-align: left;
+            padding: 12px;
+            color: var(--neon-cyan);
+            font-size: 0.75rem;
+            border-bottom: 1px solid #333;
+            background: rgba(0, 255, 204, 0.05);
+        }
+
+        .huawei-table td {
+            padding: 12px;
+            color: #ccc;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .huawei-table tr:hover td { color: #fff; background: rgba(255,255,255,0.03); }
+
+        @keyframes vibrate-mild { 0%, 100% { transform: translate(0); } 25% { transform: translate(-1px, 1px); } 75% { transform: translate(1px, -1px); } }
+        @keyframes vibrate-strong { 0%, 100% { transform: translate(0); } 25% { transform: translate(-3px, 3px); } 75% { transform: translate(3px, -3px); } }
+        
+        .vibrating-mild { animation: vibrate-mild 0.15s linear infinite; }
+        .vibrating-strong { animation: vibrate-strong 0.1s linear infinite; }
+
+        @media (max-width: 1100px) {
+            .dashboard-container { flex-direction: column; }
+            .simulator-sidebar, .table-data-side { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-box"><img src="img/logo.png" alt="Logo"><span>EMORA LINK</span></a>
+        <nav id="main-nav">
+            <a href="index.html">Trang chủ</a><a href="prototype.html">Prototype</a>
+            <a href="thuong-mai.html">Thương Mại</a><a href="co-che.html" class="active-link">Cơ Chế</a>
+            <a href="bang-gia.html">Bảng Giá</a>
+        </nav>
+        <a href="bang-gia.html" class="btn-buy">MUA NGAY</a>
+    </header>
+
+    <div class="fullpage-wrapper">
+        <div class="sections-container" id="sections-container">
+            
+            <div class="section">
+                <div class="dashboard-container">
+                    
+                    <!-- CỘT TRÁI: BỘ MÔ PHỎNG (ĐÃ NÂNG CẤP LOGIC) -->
+                    <div class="simulator-sidebar">
+                        <div class="user-config-grid">
+                            <div class="user-panel">
+                                <h4>NGƯỜI DÙNG A</h4>
+                                <div class="select-group">
+                                    <label>Sở thích</label>
+                                    <select id="hobby-a">
+                                        <option value="cat">Yêu Mèo</option>
+                                        <option value="book">Yêu Sách</option>
+                                    </select>
+                                </div>
+                                <div class="select-group">
+                                    <label>Trạng thái</label>
+                                    <select id="state-a">
+                                        <option value="passive">Thụ động</option>
+                                        <option value="nervous">Hồi hộp</option>
+                                        <option value="ready">Sẵn sàng</option>
+                                        <option value="active">Năng động</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="user-panel">
+                                <h4>NGƯỜI DÙNG B</h4>
+                                <div class="select-group">
+                                    <label>Sở thích</label>
+                                    <select id="hobby-b">
+                                        <option value="cat">Yêu Mèo</option>
+                                        <option value="music">Yêu Nhạc</option>
+                                    </select>
+                                </div>
+                                <div class="select-group">
+                                    <label>Trạng thái</label>
+                                    <select id="state-b">
+                                        <option value="passive">Thụ động</option>
+                                        <option value="nervous">Hồi hộp</option>
+                                        <option value="ready">Sẵn sàng</option>
+                                        <option value="active">Năng động</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="display-screen">
+                            <div class="device-node" id="dev-a"><div class="led-active" id="led-a"></div></div>
+                            <div class="status-info">
+                                <h5 id="match-label">CHỜ QUÉT...</h5>
+                                <p id="match-desc">Lựa chọn cấu hình để xem phản hồi thiết bị</p>
+                            </div>
+                            <div class="device-node" id="dev-b"><div class="led-active" id="led-b"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- CỘT PHẢI: BẢNG DỮ LIỆU ĐẦY ĐỦ 8 TRƯỜNG HỢP -->
+                    <div class="table-data-side">
+                        <h3>Bảng 4: Mô phỏng cơ chế kết nối đầy đủ</h3>
+                        <table class="huawei-table">
+                            <thead>
+                                <tr>
+                                    <th>Sở thích</th>
+                                    <th>Trạng thái A</th>
+                                    <th>Trạng thái B</th>
+                                    <th>Mức độ</th>
+                                    <th>Phản hồi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Không trùng</td><td>Bất kỳ</td><td>Bất kỳ</td><td>Không</td><td>Không phản hồi</td></tr>
+                                <tr><td>Trùng</td><td>Thụ động</td><td>Thụ động</td><td>Không</td><td>Không phản hồi</td></tr>
+                                <tr><td>Trùng</td><td>Hồi hộp</td><td>Thụ động</td><td>Thấp</td><td>LED sáng rất nhẹ</td></tr>
+                                <tr><td>Trùng</td><td>Hồi hộp</td><td>Hồi hộp</td><td>TB thấp</td><td>LED sáng nhẹ</td></tr>
+                                <tr><td>Trùng</td><td>Hồi hộp</td><td>Sẵn sàng</td><td>Trung bình</td><td>LED sáng nhẹ, rung 1 nhịp</td></tr>
+                                <tr><td>Trùng</td><td>Sẵn sàng</td><td>Sẵn sàng</td><td>Cao</td><td>LED sáng rõ, rung nhịp đều</td></tr>
+                                <tr><td>Trùng</td><td>Sẵn sàng</td><td>Năng động</td><td>Cao</td><td>LED sáng rõ, rung mạnh hơn</td></tr>
+                                <tr><td>Trùng</td><td>Năng động</td><td>Năng động</td><td>Rất cao</td><td>LED sáng mạnh, rung theo nhịp</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section" id="sec-simulation">
+                <div class="epic-layout">
+                    <div class="radar-bg" id="radar">
+                        <div class="wave wave-1"></div><div class="wave wave-2"></div><div class="wave wave-3"></div>
+                    </div>
+                    <img src="img/distance.png" class="epic-img" alt="Radar">
+                    <div class="epic-text">
+                        <h2>KẾT NỐI KHÔNG GIỚI HẠN</h2>
+                        <p style="font-size: 1.3rem;">Chỉ một chạm NFC mượt mà. Thiết bị tự động <strong>rung haptics</strong><br>và lóe sáng <strong>đèn LED rực rỡ</strong> đồng bộ tức thì.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const hobbyA = document.getElementById('hobby-a');
+        const hobbyB = document.getElementById('hobby-b');
+        const stateA = document.getElementById('state-a');
+        const stateB = document.getElementById('state-b');
+        const label = document.getElementById('match-label');
+        const desc = document.getElementById('match-desc');
+        const ledA = document.getElementById('led-a');
+        const ledB = document.getElementById('led-b');
+        const devA = document.getElementById('dev-a');
+        const devB = document.getElementById('dev-b');
+
+        function updateSim() {
+            let hA = hobbyA.value; let hB = hobbyB.value;
+            let sA = stateA.value; let sB = stateB.value;
+
+            // Reset trạng thái
+            ledA.style.opacity = "0"; ledB.style.opacity = "0";
+            ledA.style.boxShadow = "none"; ledB.style.boxShadow = "none";
+            devA.classList.remove('vibrating-mild', 'vibrating-strong');
+            devB.classList.remove('vibrating-mild', 'vibrating-strong');
+
+            // LỚP 1: KIỂM TRA SỞ THÍCH
+            if (hA !== hB) {
+                label.innerText = "KHÔNG KẾT NỐI";
+                desc.innerText = "Sở thích không trùng khớp";
+                return;
+            }
+
+            // LỚP 2: KIỂM TRA TRẠNG THÁI
+            // RẤT CAO: Năng động - Năng động
+            if (sA === 'active' && sB === 'active') {
+                label.innerText = "RẤT CAO";
+                desc.innerText = "Đèn LED sáng mạnh, rung theo nhịp liên tục";
+                ledA.style.opacity = "1"; ledB.style.opacity = "1";
+                ledA.style.boxShadow = "0 0 35px var(--neon-cyan)"; ledB.style.boxShadow = "0 0 35px var(--neon-cyan)";
+                devA.classList.add('vibrating-strong'); devB.classList.add('vibrating-strong');
+            }
+            // CAO: Sẵn sàng - Năng động
+            else if ((sA === 'ready' && sB === 'active') || (sB === 'ready' && sA === 'active')) {
+                label.innerText = "CAO";
+                desc.innerText = "Đèn LED sáng rõ, rung mạnh hơn";
+                ledA.style.opacity = "0.9"; ledB.style.opacity = "0.9";
+                ledA.style.boxShadow = "0 0 20px var(--neon-cyan)"; ledB.style.boxShadow = "0 0 20px var(--neon-cyan)";
+                devA.classList.add('vibrating-strong'); devB.classList.add('vibrating-strong');
+            }
+            // CAO: Sẵn sàng - Sẵn sàng
+            else if (sA === 'ready' && sB === 'ready') {
+                label.innerText = "CAO";
+                desc.innerText = "Đèn LED sáng rõ, rung nhịp đều";
+                ledA.style.opacity = "0.8"; ledB.style.opacity = "0.8";
+                ledA.style.boxShadow = "0 0 15px var(--neon-cyan)"; ledB.style.boxShadow = "0 0 15px var(--neon-cyan)";
+                devA.classList.add('vibrating-mild'); devB.classList.add('vibrating-mild');
+            }
+            // TRUNG BÌNH: Hồi hộp - Sẵn sàng
+            else if ((sA === 'nervous' && sB === 'ready') || (sB === 'nervous' && sA === 'ready')) {
+                label.innerText = "TRUNG BÌNH";
+                desc.innerText = "Đèn LED sáng nhẹ, rung ngắn (1 nhịp)";
+                ledA.style.opacity = "0.6"; ledB.style.opacity = "0.6";
+                devA.classList.add('vibrating-mild'); devB.classList.add('vibrating-mild');
+                setTimeout(() => { 
+                    devA.classList.remove('vibrating-mild'); 
+                    devB.classList.remove('vibrating-mild'); 
+                }, 400);
+            }
+            // TRUNG BÌNH THẤP: Hồi hộp - Hồi hộp
+            else if (sA === 'nervous' && sB === 'nervous') {
+                label.innerText = "TRUNG BÌNH THẤP";
+                desc.innerText = "Đèn LED sáng nhẹ";
+                ledA.style.opacity = "0.4"; ledB.style.opacity = "0.4";
+            }
+            // THẤP: Hồi hộp - Thụ động
+            else if ((sA === 'nervous' && sB === 'passive') || (sB === 'nervous' && sA === 'passive')) {
+                label.innerText = "THẤP";
+                desc.innerText = "Đèn LED sáng rất nhẹ";
+                ledA.style.opacity = "0.2"; ledB.style.opacity = "0.2";
+            }
+            // KHÔNG KẾT NỐI: Thụ động - Thụ động hoặc tương đương
+            else {
+                label.innerText = "KHÔNG KẾT NỐI";
+                desc.innerText = "Trùng sở thích nhưng trạng thái không đủ để kích hoạt";
+            }
+        }
+
+        [hobbyA, hobbyB, stateA, stateB].forEach(el => el.addEventListener('change', updateSim));
+        updateSim();
+    </script>
+</body>
+</html>

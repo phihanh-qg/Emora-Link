@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan - EMORA LINK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-box">
+            <img src="img/logo.png" alt="Logo">
+            <span>EMORA LINK</span>
+        </a>
+        <nav id="main-nav">
+            <a href="index.html">Trang chủ</a>
+            <a href="prototype.html">Prototype</a>
+            <a href="thuong-mai.html">Thương Mại</a>
+            <a href="co-che.html">Cơ Chế</a>
+            <a href="bang-gia.html">Bảng Giá</a>
+        </nav>
+        <a href="bang-gia.html" class="btn-buy">MUA NGAY</a>
+    </header>
+
+    <div class="fullpage-wrapper">
+        <div class="sections-container" id="sections-container">
+            
+            <!-- TRANG 1: HERO -->
+            <div class="section active">
+                <div class="epic-layout">
+                    <h3 style="color: var(--neon-cyan); letter-spacing: 4px; margin-bottom: 10px;">SOCIAL WEARABLE</h3>
+                    <h1 style="font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase;">Chạm đúng người<br>Chạm đúng lúc</h1>
+                    <img src="img/watch_blue.png" class="main-img floating" alt="EMORA LINK">
+                </div>
+            </div>
+
+            <!-- TRANG 2: THỰC TRẠNG VĨ MÔ (ĐÃ THAY ẢNH BẰNG VIDEO) -->
+            <div class="section">
+                <div class="split-layout">
+                    <div class="col-img">
+                        <!-- Thẻ Video thay thế cho ảnh -->
+                        <video src="video/noi-co-don.mp4" class="main-video" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="col-text text-left">
+                        <h3 style="color: #ff9900;">BỐI CẢNH XÃ HỘI</h3>
+                        <h2>CÔ ĐƠN GIỮA THỜI ĐẠI SỐ</h2>
+                        <ul class="list-info">
+                            <li>Trong kỷ nguyên số, khi mạng xã hội ảo lên ngôi, người trẻ lại càng dễ rơi vào trạng thái cô đơn giữa đám đông.</li>
+                            <li>Theo WHO, <strong>16% dân số thế giới</strong> từng trải qua cô đơn, biến đây thành vấn đề sức khỏe cộng đồng toàn cầu.</li>
+                            <li>Nghịch lý là sự cô lập gia tăng giữa thời đại công nghệ. Ví dụ như ứng dụng Sileme ở Trung Quốc chuyên gửi cảnh báo nếu người sống một mình không xác nhận an toàn.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRANG 3: THỰC TRẠNG VI MÔ & KHẢO SÁT -->
+            <div class="section">
+                <div class="split-layout">
+                    <div class="col-text text-left">
+                        <h3 style="color: var(--neon-cyan);">VẤN ĐỀ CỦA GEN Z</h3>
+                        <h2>NỖI SỢ SỰ GƯỢNG GẠO</h2>
+                        <ul class="list-info">
+                            <li><strong>53% sinh viên</strong> gặp khó khăn khi bắt chuyện với người lạ ở nơi đông người.</li>
+                            <li><strong>69% bày tỏ mong muốn</strong> có công cụ nhận diện người chung sở thích để dễ kết nối.</li>
+                            <li>Theo đại diện Công ty Mộc Phát: <em>"Rào cản lớn nhất của các bạn trẻ là nỗi sợ sự gượng gạo, dẫn đến việc chọn cách an toàn nhất là cắm mặt vào điện thoại"</em>.</li>
+                            <li><strong>Giải pháp:</strong> EMORA LINK đóng vai trò như 1 chất xúc tác giúp giảm rào cản tâm lý ban đầu.</li>
+                        </ul>
+                        
+                        <!-- Link xem toàn bộ khảo sát -->
+                        <a href="https://docs.google.com/forms/d/1mPF1oWNkUTOFIFxZSbmr8eJjEkjFWpYO9R8rcoPGiXM/edit#responses"
+   class="survey-link"
+   target="_blank"
+   rel="noopener noreferrer">
+                            <span class="icon">📊</span> Nhấn vào đây để xem toàn bộ khảo sát
+                        </a>
+                    </div>
+                    
+                    <!-- GALLERY TƯƠNG TÁC: 1 VIDEO LỚN + 3 BIỂU ĐỒ NHỎ -->
+                    <div class="col-gallery">
+                        <!-- Video Lớn -->
+                        <div class="main-display">
+                            <video id="main-video" src="video/noi-so.mp4" autoplay loop muted playsinline></video>
+                            <button id="mute-toggle" class="mute-btn">🔇 Bật âm thanh</button>
+                        </div>
+                        
+                        <!-- 3 Biểu Đồ Nhỏ bằng CSS -->
+                        <div class="thumbnail-track">
+                            <!-- Biểu đồ 1: Mức độ khó -->
+                            <div class="mini-chart-box" title="53% Gặp khó khăn">
+                                <div class="mini-donut" style="background: conic-gradient(var(--neon-blue) 0% 16%, var(--neon-magenta) 16% 53%, #ff9900 53% 85%, var(--neon-cyan) 85% 100%); box-shadow: 0 0 15px var(--neon-magenta);">
+                                    <div class="mini-donut-inner">53%</div>
+                                </div>
+                                <div class="mini-chart-title">Gặp<br>khó khăn</div>
+                            </div>
+
+                            <!-- Biểu đồ 2: Mong muốn công cụ -->
+                            <div class="mini-chart-box" title="69% Cần công cụ">
+                                <div class="mini-donut" style="background: conic-gradient(var(--neon-blue) 0% 69%, #ff9900 69% 86%, var(--neon-magenta) 86% 100%); box-shadow: 0 0 15px var(--neon-blue);">
+                                    <div class="mini-donut-inner">69%</div>
+                                </div>
+                                <div class="mini-chart-title">Cần<br>công cụ</div>
+                            </div>
+
+                            <!-- Biểu đồ 3: Đối tượng (Năm 1-2) -->
+                            <div class="mini-chart-box" title="55% Là Sinh viên Năm 1-2">
+                                <div class="mini-donut" style="background: conic-gradient(var(--neon-blue) 0% 29%, var(--neon-magenta) 29% 55%, #ff9900 55% 79%, var(--neon-cyan) 79% 100%); box-shadow: 0 0 15px var(--neon-cyan);">
+                                    <div class="mini-donut-inner">55%</div>
+                                </div>
+                                <div class="mini-chart-title">SV Năm<br>1 & 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
